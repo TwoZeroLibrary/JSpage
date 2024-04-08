@@ -15,6 +15,24 @@
   <h3>Click Event</h3>
   <button id="myButton">Click Me</button>
 </div>
-  
+
+<div>
+  <h3>Mouse Event</h3>
+  <div id="myDiv" style="width: 200px; height: 40px; background-color: lightblue;">Mouse over me</div>
+</div>
+
+<script>
+  // Click Event
+  document.getElementById("myButton").addEventListener("click", function() {
+    console.log("Button clicked!");
+  });
+
+  // Mouse Event
+  document.getElementById("myDiv").addEventListener("mouseover", function() {
+    this.style.backgroundColor = "lightgreen";
+    console.log("lightgreen");
+  });
+</script>
+
 </body>
 </html>
