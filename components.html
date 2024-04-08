@@ -40,8 +40,12 @@
     shadow.attachShadow({ mode: 'open' })
     shadow.innerHTML = ' <p style = "blue" >새도우 돔</p>'
 
-    //커스텀 엘리먼트
+    // HTML 템플릿
     let tp = document.getElementById("tp");
+    let pasteTp = document.getElementById("pasteTp")
+    
+    const cloneTp = tp.content.cloneNode(true);
+    pasteTp.appendChild(cloneTp);
 
   </script>
 
