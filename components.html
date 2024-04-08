@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>웹 컴포넌트</h1>
+
+  <div>
+    <p>1. 커스텀 엘리먼트(Custom Elements)</p>
+    <component-a></component-a>
+  </div>
+
+  <div>
+    <p>2. 섀도우 돔(Shadow DOM)</p>
+  </div>
+
+  <div>
+    <p>3. HTML 템플릿(HTML Templates)</p>
+  </div>
+  <script>
+    class componentA extends HTMLElement {
+      connectedCallback() {
+        this.setAttribute('id', 'a');
+        this.innerHTML = 
+        '<p style="color: red;"> 커스텀 엘리먼트 A 컴포넌트 </p>';
+      }
+    }
+    customElements.define("component-a", componentA)
+  </script>
+
+</body>
+</html>
