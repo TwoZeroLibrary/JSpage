@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>폼 예제</title>
+</head>
+<body>
+
+  <form id="myForm">
+    <input type="text" name="textField" placeholder="Enter Text">
+    <input type="checkbox" name="checkBox">
+    <input type="radio" name="radioButton" value="Option1">Option 1
+    <input type="radio" name="radioButton" value="Option2">Option 2
+    <button type="button" id="submitForm">Submit</button>
+    <button type="button" id="resetForm">Reset</button>
+</form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    let form = document.getElementById('myForm');
+
+    // -- 폼 이벤트 --
+    // 'change' 이벤트 핸들러: 폼 필드 값이 변경되고 포커스가 이동했을 때 실행됩니다.
+    form.addEventListener('change', function(event) {
+      console.log('Change event on:', event.target);
+    });
+
+    // 'input' 이벤트 핸들러: 사용자가 폼 필드에 데이터를 입력할 때마다 실행됩니다.
+    form.addEventListener('input', function(event) {
+      console.log('Input event on:', event.target);
+    });fo
+
+    // 'cut' 이벤트 핸들러: 사용자가 폼 필드의 텍스트를 잘라낼 때 실행됩니다.
+    document.addEventListener('cut', function(event) {
+      console.log('Cut event on:', event.target);
+    });
+
+    // 'copy' 이벤트 핸들러: 사용자가 폼 필드의 텍스트를 복사할 때 실행됩니다.
+    document.addEventListener('copy', function(event) {
+      console.log('Copy event on:', event.target);
+    });
+
+    // 'paste' 이벤트 핸들러: 사용자가 폼 필드에 텍스트를 붙여넣을 때 실행됩니다.
+    document.addEventListener('paste', function(event) {
+      console.log('Paste event on:', event.target);
+    });
+
+    // 'submit' 이벤트 핸들러: 폼 제출 버튼이 클릭되었을 때 실행됩니다. 기본 동작은 방지됩니다.
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      console.log('Form Submitted!', 'Form Data:', new FormData(form));
+      // 여기서 추가적인 처리를 할 수 있습니다, 예를 들어 AJAX 요청을 보내기
+    });
+
+    // 폼의 프로퍼티 출력
+    console.log('Form elements:', form.elements); // 폼 내의 모든 요소
+    console.log('Form action:', form.action); // 폼의 'action' 속성 값
+    console.log('Form method:', form.method); // 폼의 'method' 속성 값
+
+    // 'submitForm' 버튼 클릭 이벤트 핸들러: AJAX 요청을 전송합니다. (폼 데이터 전송)
+    document.getElementById('submitForm').addEventListener('click', function() {
+      let formData = new FormData(form);
+      let jsonObject = {};
+
+      // 폼 데이터를 JSON 객체로 변환
+      for (const [key, value] of formData.entries()) {
+        jsonObject[key] = value;
+      }
+
+      // AJAX 요청 전송
+      fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(jsonObject)
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+    });
+    // 'resetForm' 버튼 클릭 이벤트 핸들러: 폼을 초기 상태로 재설정합니다.
+    document.getElementById('resetForm').addEventListener('click', function() {
+      form.reset();
+    });
+  });
+</script>
+</body>
+</html>
