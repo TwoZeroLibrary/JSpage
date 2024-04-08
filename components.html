@@ -15,12 +15,17 @@
 
   <div>
     <p>2. 섀도우 돔(Shadow DOM)</p>
+    <p id = "shadowDomID"></p>
   </div>
 
   <div>
     <p>3. HTML 템플릿(HTML Templates)</p>
+    <p id ="pasteTp" style="color: orange"></p>
+    <template id = "tp">HTML 템플릿 입니다.</template>
   </div>
   <script>
+
+    // 커스텀 엘리먼트
     class componentA extends HTMLElement {
       connectedCallback() {
         this.setAttribute('id', 'a');
@@ -29,6 +34,15 @@
       }
     }
     customElements.define("component-a", componentA)
+
+    // 새도우 돔
+    let shadow = document.getElementById("shadowDomID");
+    shadow.attachShadow({ mode: 'open' })
+    shadow.innerHTML = ' <p style = "blue" >새도우 돔</p>'
+
+    //커스텀 엘리먼트
+    let tp = document.getElementById("tp");
+
   </script>
 
 </body>
